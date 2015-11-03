@@ -18,13 +18,17 @@ module.exports = {
 		publicPath: "/js/",
 		stats: {
 			colors: true
-		}
-	},
+		},
+		hot: true,
+		noInfo: false,
+		port: 8080,
+		host: "localhost"
+	}/*,
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false
 			}
 		})
-	]
+	]*/
 };

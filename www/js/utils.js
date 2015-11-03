@@ -1,7 +1,7 @@
 define(function () { // AMD module definition
 	return { // AMD export
 		hello: function () {
-			console.log("Hello, World!");
+			console.log("Hello, Noooo!");
 		}
 	};
 });

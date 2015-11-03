@@ -2,7 +2,6 @@ var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
-var webpack_config = require("./webpack.config");
 var jshint = require("gulp-jshint");
 var stylish = require("jshint-stylish");
 var jsonlint = require("gulp-jsonlint");
@@ -10,7 +9,8 @@ var path = require("path");
 
 // Compile JS sources with Webpack
 gulp.task("webpack", function (callback) {
-	webpack(webpack_config, function (err, stats) {
+	var config = require("./webpack.config");
+	webpack(config, function (err, stats) {
 		if (err) {
 			throw new gutil.PluginError("webpack", err);
 		}
@@ -25,9 +25,12 @@ gulp.task("webpack", function (callback) {
 
 // Webpack Dev Server
 gulp.task("webpack-dev-server", function (callback) {
-	var compiler = webpack(webpack_config);
+	var config, compiler;
 
-	new WebpackDevServer(compiler, webpack_config.devServer).listen(8080, "localhost", function (err) {
+	config = require("./webpack.config");
+	compiler = webpack(config);
+
+	new WebpackDevServer(compiler, config.devServer).listen(8080, "localhost", function (err) {
 		if (err) {
 			throw new gutil.PluginError("webpack-dev-server", err);
 		}
@@ -54,13 +57,13 @@ gulp.task("lint-json", function () {
 		gutil.log(gutil.colors.red("File "), gutil.colors.cyan(path.relative(__dirname, file.path)), gutil.colors.red(" is not valid JSON."));
 	}
 
-	return gulp.src(["*.json", "www/**/*.json", "!www/js/lib/**/*.json"])
+	return gulp.src(["*.json", "www/**/*.json", "!www/lib/**/*.json"])
 		.pipe(jsonlint())
 		.pipe(jsonlint.reporter(reporter));
 });
 
 gulp.task("lint-js", function () {
-	return gulp.src(["*.js", "www/js/**/*.js", "!www/js/lib/**/*.js", "!www/js/pack.js"])
+	return gulp.src(["*.js", "www/js/**/*.js", "!www/js/pack.js"])
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish, {
 			verbose: true
