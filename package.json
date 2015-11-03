@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Zorgatone <zorgatone@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "^1.12.2"
+    "gulp": "^3.9.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
   }
 }
