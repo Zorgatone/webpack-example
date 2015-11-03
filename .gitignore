@@ -1,0 +1,4 @@
+www/js/pack.*
+www/lib
+node_modules
+typings
