@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = { // CommonJS module export
 	greeter: function (name) {
 		var el, elements;
 
@@ -11,4 +11,4 @@ module.exports = {
 			}
 		}
 	}
-}
+};
