@@ -26,19 +26,14 @@ gulp.task("webpack", function (callback) {
 // Webpack Dev Server
 gulp.task("webpack-dev-server", function (callback) {
 	var compiler = webpack(webpack_config);
-	var webpack_dev_config = Object.assign({
-		stats: {
-			colors: true
-		}
-	}, webpack_config.devServer);
 
-	new WebpackDevServer(compiler, webpack_dev_config).listen(8080, "localhost", function (err) {
+	new WebpackDevServer(compiler, webpack_config.devServer).listen(8080, "localhost", function (err) {
 		if (err) {
 			throw new gutil.PluginError("webpack-dev-server", err);
 		}
 
 		// Server listening
-		gutil.log("[webpack-dev-server]", "http://localhost:8080/index.html", gutil.colors.green);
+		gutil.log(gutil.colors.green.bold("[webpack-dev-server] http://localhost:8080/index.html"));
 
 		// keep the server alive or continue?
 		// callback();
